@@ -1,0 +1,21 @@
+# Sample only to ad to your apps.yaml, you will need to change the entities to make your system
+Reticulation:
+  module: reticulation
+  class: ReticController
+  log: test
+  main: switch.fake_main_valve
+  start_time: input_datetime.retic_start_time
+  watering_days:
+  - 'wed'
+  - 'mon'
+  - 'fri'
+  - 'sat'
+  stations:
+    - valve: switch.fake_station_1
+      run_time: input_number.run_time_1
+      active: input_boolean.station_1
+      manual: input_boolean.station_manual_1
+    - valve: switch.fake_station_2
+      run_time: input_number.run_time_2
+      active: input_boolean.station_2
+      manual: input_boolean.station_manual_2

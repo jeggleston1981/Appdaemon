@@ -34,7 +34,7 @@ class ReticController(hass.Hass):
                 self.turn_on(self.__main_valve)   # Start timer for duration of runtime 
                 self.__manual_override = 'on'
                 self.manual_timer = None
-                self.manual_timer = self.run_in(self.ManualStop, runtime * 2, valve = kwargs['valve'], manual = entity)
+                self.manual_timer = self.run_in(self.ManualStop, runtime * 60, valve = kwargs['valve'], manual = entity)
                 self.log('Manual timer started')
         elif new == 'off' and self.get_state(kwargs['valve']) == 'on':
             self.turn_off(kwargs['valve'])     #Turn on the valve and the main valve too.
@@ -62,7 +62,7 @@ class ReticController(hass.Hass):
         for station in self.__stations:
             self.log('for loop')
             if self.get_state(station['active']) == 'on':  #You always need to look out for gettting the state of an entity not just the entity
-                runtime = int(float(self.get_state(station['run_time'])))*2
+                runtime = int(float(self.get_state(station['run_time'])))*60
                 self.log('{}  {}mins'.format(station['valve'],runtime))
                 add_station = [{'switch/turn_on':{"entity_id": station['valve']}},{"sleep": runtime},
                 {'switch/turn_off':{"entity_id": station['valve']}}]
